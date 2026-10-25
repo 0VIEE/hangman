@@ -1,0 +1,12 @@
+# Compiled binaries
+hangman
+hangman.exe
+*.o
+*.out
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
