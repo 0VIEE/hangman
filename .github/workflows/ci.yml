@@ -1,0 +1,23 @@
+name: C build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Compile with strict warnings
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Compile Hangman
+        run: gcc -std=c11 -Wall -Wextra -Wpedantic -Werror -O2 main.c -o hangman
