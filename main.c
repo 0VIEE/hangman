@@ -72,7 +72,7 @@ static int read_guess(char *guess)
     return 1;
 }
 
-static void play_round(void)
+static int play_round(void)
 {
     const size_t word_count = sizeof words / sizeof words[0];
     const char *word = words[(size_t)rand() % word_count];
@@ -92,7 +92,7 @@ static void play_round(void)
         result = read_guess(&guess);
         if (result == 0) {
             puts("\nInput ended. Closing the game.");
-            return;
+            return 0;
         }
         if (result < 0) {
             continue;
@@ -119,6 +119,7 @@ static void play_round(void)
     } else {
         printf("\nNo attempts left. The word was \"%s\".\n", word);
     }
+    return 1;
 }
 
 static int play_again(void)
@@ -155,9 +156,11 @@ int main(void)
     puts("Guess the hidden word one letter at a time.");
     printf("You can make up to %d incorrect guesses.\n", MAX_MISTAKES);
 
-    do {
-        play_round();
-    } while (play_again());
+    for (;;) {
+        if (!play_round() || !play_again()) {
+            break;
+        }
+    }
 
     puts("Thanks for playing!");
     return 0;
