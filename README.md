@@ -1,126 +1,85 @@
-# hangman working on it to make the game basics 
-    #include <stdio.h>
-    #include <string.h>
-    #include <stdlib.h>//used for rand() and srand()
-    #include <time.h>//new stuff for randomization
+# Hangman in C
 
+A small, terminal-based word-guessing game written in C. Guess the hidden word one letter at a time before using all six incorrect attempts.
 
-    void check(char array[]) {
+## Features
 
-    srand(time(NULL));
+- Random word selection from a built-in word list
+- Letter-by-letter guessing with revealed letters
+- Case-insensitive input
+- Detection of repeated guesses
+- Validation for invalid input
+- Option to play multiple rounds
+- No external libraries required
 
-    char str[3][100] = {"hello", "result", "world"};
-    int count=3;
-    int ans=rand()%count;
-    char strans[100];
-    strcpy( strans,str[ans]);
+## Requirements
 
-    printf("\n(Secret word was: %s)\n", strans); 
+- A C compiler, such as GCC or Clang
+- A terminal or command prompt
 
-    int found = 0;
+## Build and run
 
-    //for (int i = 0; i < 3; i++) {
-        if (strcmp(array, strans) == 0) {
-            found = 1;
+### Linux or macOS
 
-        }
-    
+Compile the game:
 
-    if (found)
-        printf("wow good guesser.\n");
-    else
-        printf("well game over.\n");
-    }
-    int main() {
-    printf("lets play a game of guesses.\n");
-    printf("from this list of words: hello, result, world, programming, engineer, death\n");
-    printf("try to guess one of the words.\n");
-    char array[100];
-    printf("Enter the string: ");
-    scanf("%s", array);
+```bash
+gcc -std=c11 -Wall -Wextra -Wpedantic -Werror -O2 main.c -o hangman
+```
 
-    check(array);
-    return 0;
-    }
+Run it:
 
-just completed this much
+```bash
+./hangman
+```
 
-log 2 
-next chnages that occured quite a mess but did some stuff as time was less with testa and all 
+If you have `make` installed, you can also use:
 
-    #include <stdio.h>
-    #include <string.h>
-    #include <stdlib.h>//used for rand() and srand()
-    #include <time.h>//new stuff for randomization
+```bash
+make
+make run
+```
 
-    /*keywords used
-    strans1 to print blanks 
-    strans answer word 
-    str all the options
-    count no of options
-    compare to compareee*/
-    void compare(char array[], char strans[])       
-    {
-    for (int i=0;i<strlen(strans);i++)
-    {
-        if (array[i]==strans[i])
-        {
-            printf("%c",array[i]);
-        }
-        else
-        {
-            printf("_");
-        }
-    }
-    }
-    char blank(char strans1[])
-    {   
-    int a =strlen(strans1);
-    printf("your word is of length %d\n",a);
-    
-    for (int i=0;i<a;i++){
-        printf("_ ");
-    }
-    printf("\n");
-    printf("\n");
-    return 0;
-    }
+### Windows with MinGW-w64 GCC
 
-    void check(char array[],char strans[]) 
-    {
-    printf("\n(Secret word was: %s)\n", strans); 
+Open PowerShell in the project folder and run:
 
-    int found = 0;
+```powershell
+gcc -std=c11 -Wall -Wextra -Wpedantic -Werror -O2 main.c -o hangman.exe
+.\hangman.exe
+```
 
-    //for (int i = 0; i < 3; i++) {
-        if (strcmp(array, strans) == 0) 
-        {
-            found = 1;
-        }
-    if (found)
-        printf("wow good guesser.\n");
-    else
-        printf("well game over.\n");
-    }
+## How to play
 
-    int main() {
-    printf("lets play a game of guesses.\n");
-    printf("from this list of words: hello, result, world, programming, engineer, death\n");
-    printf("try to guess one of the words.\n");
-    char array[100];
-    
-    srand(time(NULL));
+1. The game selects a random word.
+2. Enter one letter each turn.
+3. Correct guesses reveal every occurrence of that letter.
+4. An incorrect guess uses one of your six attempts.
+5. Guess the complete word before you run out of attempts to win.
+6. Choose whether to start another round when the game ends.
 
-    char str[3][100] = {"hello", "result", "world"};
-    int count=3;
-    int ans=rand()%count;
-    char strans[100];
-    
-    strcpy( strans,str[ans]);
-    blank(strans);
-    printf("Enter the string: ");
-    scanf("%s", array);
-    compare(array, strans);
-    check(array,strans);
-    return 0;
-    }
+Repeated letters and invalid input do not use an attempt.
+
+## Project structure
+
+```text
+hangman/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── .editorconfig
+├── .gitignore
+├── Makefile
+├── README.md
+└── main.c
+```
+
+## What this project practises
+
+This project is an exercise in C fundamentals, including functions, arrays, strings, loops, character handling, input validation, and basic random number generation.
+
+The word list is defined near the top of `main.c`. You can add or change words there.
+
+---
+
+Built as a learning project while practising C programming.
